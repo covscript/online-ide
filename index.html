@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Covariant Script Online IDE</title>
-    <style>
-            div{float: left;}
-    </style>
 </head>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -63,17 +60,17 @@
 <body>
     <div id="main">
             <div id="left">
-                <p>Code</p>
+                <p>代码</p>
                 <textarea class="comments" name="code" id="code" rows="20" autofocus="true"
                     style="resize: none; font-size: large;"></textarea>
-                <button class="comments" style="font-size: x-large;" type="submit" onclick="onRun()">Run</button>
-                <button class="comments" style="font-size: x-large;" type="clear" onclick="onReset()">Reset</button>
+                <button class="comments" style="font-size: large;height: 4.6%;" type="submit" onclick="onRun()">运行</button>
+                <button class="comments" style="font-size: large;height: 4.6%;" type="clear" onclick="onReset()">重置</button>
             </div>
             <div id="right">
-                <p>Input</p>
+                <p>输入</p>
                 <textarea class="comments" name="stdin" id="stdin" rows="10"
                     style="resize: none; font-size: large;"></textarea>
-                <p>Output</p>
+                <p>输出</p>
                 <textarea class="comments" name="result" id="result" rows="10" readonly="true"
                     style="resize: none; font-size: large;"></textarea>
             </div>      
