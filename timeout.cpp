@@ -12,9 +12,11 @@ int waitpid_timeout(pid_t pid, int ms) {
     sigset_t mask, orig_mask;
     sigemptyset(&mask);
     sigaddset(&mask, SIGCHLD);
+
     if (sigprocmask(SIG_BLOCK, &mask, &orig_mask) < 0) {
         perror("sigprocmask");
         return 1;
+        
     } else {
         struct timespec timeout;
         timeout.tv_sec = ms / 1000;
@@ -33,7 +35,7 @@ int waitpid_timeout(pid_t pid, int ms) {
                 }
             }
             break;
-        } while (1);
+        } while (true);
 
         if (waitpid(pid, NULL, 0) < 0) {
             perror("waitpid");
