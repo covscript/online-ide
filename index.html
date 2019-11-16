@@ -11,23 +11,26 @@
 <script>
     function onRun() {
         var code = document.getElementById("code").value
+	var stdin = document.getElementById("stdin").value
         document.getElementById("result").value = ""
 
+	var ecode = window.btoa(code)
         $.ajax({
             type: "post",
-            url: "http://mikelee.320.io/cgi/cs-online",
-            data: code,
+            url: "http://dev.covariant.cn/cgi/cs-online",
+	    data: JSON.stringify({code: ecode, stdin: stdin}),
             async: true,
             success: function (data) {
 		document.getElementById("result").value = data
             },
             error: function (data) {
-                document.getElementById("result").value = data
+                document.getElementById("result").value = "Error: " + data
             }
         });
     }
 
     function onReset() {
+	document.getElementById("result").value = ""
         document.getElementById("code").value =
             "import streams\n" +
             "\n" +
@@ -46,6 +49,10 @@
     <textarea name="code" id="code" cols="60" rows="20" autofocus="true"
         style="resize: none; font-size: 24px;"></textarea>
     <br>
+    <p>stdin</p>
+    <textarea name="stdin" id="stdin" cols="60" rows="5" autofocus="true"
+        style="resize: none; font-size: 24px;"></textarea>
+    <br>
     <button type="submit" onclick="onRun()">Run</button>
     <button type="clear" onclick="onReset()">Reset</button>
     <br>
@@ -53,8 +60,9 @@
         style="resize: none; font-size: 24px;"></textarea>
 </body>
 
-<script>
-    onReset()
-</script>
+	<script>
+		onReset()
+	</script>
 
 </html>
+

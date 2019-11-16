@@ -56,7 +56,7 @@ int main(int argc, const char **argv) {
     } else if (pid == 0) {
         std::string bin = "/usr/bin/cs";
         std::string cs = argv[1];
-        char *args[3]{bin.c_str(), cs.c_str(), nullptr};
+        const char *args[3] = {bin.c_str(), cs.c_str(), nullptr};
         execve(bin.c_str(), args, nullptr);
 
     } else {
