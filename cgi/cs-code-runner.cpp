@@ -28,7 +28,7 @@ int waitpid_timeout(pid_t pid, int ms) {
                 if (errno == EINTR) {
                     continue;
                 } else if (errno == EAGAIN) {
-                    printf("Time limie exceeded: %d (ms)\n", ms);
+                    printf("Time limit exceeded: %d (ms)\n", ms);
                     kill(pid, SIGKILL);
                 } else {
                     perror("sigtimedwait");
