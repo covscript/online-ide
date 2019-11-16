@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+TIMEOUT=3
+
+echo -ne "Content-type: text/html\n\n"
+
+F=$(mktemp "/tmp/csonline.XXXXXXXX")
+trap "rm -f $F" EXIT
+
+# Run CovScript
+cat - > "$F"
+/usr/bin/cs-code-runner 2>&1 $F
+

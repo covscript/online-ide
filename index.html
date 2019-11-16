@@ -1,0 +1,60 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Covariant Script Online IDE</title>
+</head>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+    function onRun() {
+        var code = document.getElementById("code").value
+        document.getElementById("result").value = ""
+
+        $.ajax({
+            type: "post",
+            url: "http://mikelee.320.io/cgi/cs-online",
+            data: code,
+            async: true,
+            success: function (data) {
+		document.getElementById("result").value = data
+            },
+            error: function (data) {
+                document.getElementById("result").value = data
+            }
+        });
+    }
+
+    function onReset() {
+        document.getElementById("code").value =
+            "import streams\n" +
+            "\n" +
+            "@begin\n\n" +
+            "streams.iterate(1, [](x) -> x * 2)\n" +
+            "       .filter([](x) -> x > 100000)\n" +
+            "       .skip(5)\n" +
+            "       .take_while([](x) -> x <= 5000000)\n" +
+            "       .for_each(system.out.println)\n" +
+            "\n" +
+            "@end\n"
+    }
+</script>
+
+<body>
+    <textarea name="code" id="code" cols="60" rows="20" autofocus="true"
+        style="resize: none; font-size: 24px;"></textarea>
+    <br>
+    <button type="submit" onclick="onRun()">Run</button>
+    <button type="clear" onclick="onReset()">Reset</button>
+    <br>
+    <textarea name="result" id="result" cols="60" rows="5" readonly="true"
+        style="resize: none; font-size: 24px;"></textarea>
+</body>
+
+<script>
+    onReset()
+</script>
+
+</html>
