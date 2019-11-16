@@ -1,12 +1,13 @@
-#include <stdio.h>
+#include <cstdio>
 #include <unistd.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
 #include <errno.h>
-#include <time.h>
+#include <ctime>
 #include <string.h>
+#include <string>
 
 int waitpid_timeout(pid_t pid, int ms) {
     sigset_t mask, orig_mask;
@@ -53,9 +54,10 @@ int main(int argc, const char **argv) {
         perror("fork");
 
     } else if (pid == 0) {
-        // execve
-        char *args[3]{strdup("/usr/bin/cs"), strdup(argv[1]), nullptr};
-        execve("/usr/bin/cs", args, nullptr);
+        std::string bin = "/usr/bin/cs";
+        std::string cs = argv[1];
+        char *args[3]{bin.c_str(), cs.c_str(), nullptr};
+        execve(bin.c_str(), args, nullptr);
 
     } else {
         waitpid_timeout(pid, timeout);
