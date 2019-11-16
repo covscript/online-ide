@@ -37,7 +37,7 @@ int waitpid_timeout(pid_t pid, int ms) {
             break;
         } while (true);
 
-        if (waitpid(pid, NULL, 0) < 0) {
+        if (waitpid(pid, nullptr, 0) < 0) {
             perror("waitpid");
             return 1;
         }
