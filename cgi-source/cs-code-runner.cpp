@@ -66,7 +66,7 @@ int waitpid_timeout(pid_t pid, int ms) {
 }
 
 int main(int argc, const char **argv) {
-    if (argc != 2) {
+    if (argc != 3) {
         fprintf(stderr, "The Covariant Script Code Runner v1.0\n");
         fprintf(stderr, "\n");
         fprintf(stderr, "Usage: cs-code-runner <timeout> <file>\n");
@@ -97,9 +97,10 @@ int main(int argc, const char **argv) {
     } else if (pid == 0) {
         // This code executes in the child process
         char *bin = strdup("/usr/bin/cs");
-        char *cs = strdup(argv[2]);
+        char *cs = strdup(file);
+
         if (bin == nullptr || cs == nullptr) {
-            fprintf(stderr, "cs-code-runner(child): failed to strdup(): out of memory\n");
+            fprintf(stderr, "cs-code-runner(child): out of memory\n");
             exit(1);
         }
 
@@ -107,11 +108,15 @@ int main(int argc, const char **argv) {
         execve(bin, args, nullptr);
 
         // if execve() returns, the call failed
-        perror("cs-code-runner(child): failed to execve()");
+        free(bin);
+        free(cs);
+        perror("cs-code-runner(child): execve()");
         exit(1);
 
     } else {
         // Parent process
         waitpid_timeout(pid, timeout);
     }
+
+    return 0;
 }
