@@ -40,8 +40,11 @@ include_directories(${CMAKE_BINARY_DIR}/generated-headers)
 
 add_subdirectory(third-party/jsoncpp)
 add_subdirectory(third-party/cppcodec)
+include_directories(third-party/cppcodec)
 
 add_executable(cs-code-runner cgi-source/cs-code-runner.cpp)
 add_executable(cs-online cgi-source/cs-online-cgi.cpp)
+
+add_dependencies(cs-online cs-code-runner)
 
 target_link_libraries(cs-online jsoncpp_lib)
