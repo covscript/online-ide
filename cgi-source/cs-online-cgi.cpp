@@ -21,9 +21,10 @@ CodeSession parseSessionStream(std::istream &stream) {
     }
 
     std::string encodedCode = root["code"].asString();
-    std::string input = root["stdin"].asString();
+    std::string encodedInput = root["stdin"].asString();
 
     std::string code = Base64::decode<std::string>(encodedCode);
+    std::string input = Base64::decode<std::string>(encodedInput);
 
     return std::make_pair(code, input);
 }
