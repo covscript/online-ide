@@ -15,18 +15,20 @@
         document.getElementById("result").value = ""
 
         var ecode = window.btoa(code)
-            $.ajax({
-                type: "post",
-                url: "http://dev.covariant.cn/cgi/cs-online",
-            data: JSON.stringify({code: ecode, stdin: stdin == "" ? "\0" : stdin}),
-                async: true,
-                success: function (data) {
-            document.getElementById("result").value = data
-                },
-                error: function (data) {
-                    document.getElementById("result").value = "Error: " + data
-                }
-            });
+        var estdin = window.btoa(stdin)
+
+        $.ajax({
+            type: "post",
+            url: "http://dev.covariant.cn/cgi/cs-online",
+            data: JSON.stringify({code: ecode, stdin: estdin}),
+            async: true,
+            success: function (data) {
+                document.getElementById("result").value = data
+            },
+            error: function (data) {
+                document.getElementById("result").value = "Error: " + data
+            }
+        });
     }
 
     function onReset() {
@@ -43,6 +45,7 @@
             "\n" +
             "@end\n"
     }
+
 </script>
 
 <style>
@@ -55,30 +58,32 @@
     word-break:break-all;
     font-family:monospace;
 }
+
 </style>
 
 <body>
-    <div id="main">
-            <div id="left">
-                <p>代码</p>
-                <textarea class="comments" name="code" id="code" rows="20" autofocus="true"
-                    style="resize: none; font-size: large;"></textarea>
-                <button class="comments" style="font-size: large;height: 4.6%;" type="submit" onclick="onRun()">运行</button>
-                <button class="comments" style="font-size: large;height: 4.6%;" type="clear" onclick="onReset()">重置</button>
-            </div>
-            <div id="right">
-                <p>输入</p>
-                <textarea class="comments" name="stdin" id="stdin" rows="10"
-                    style="resize: none; font-size: large;"></textarea>
-                <p>输出</p>
-                <textarea class="comments" name="result" id="result" rows="10" readonly="true"
-                    style="resize: none; font-size: large;"></textarea>
-            </div>      
+<div id="main">
+    <div id="left">
+        <p>代码</p>
+        <textarea class="comments" name="code" id="code" rows="20" autofocus="true"
+                  style="resize: none; font-size: large;"></textarea>
+        <button class="comments" style="font-size: large;height: 4.6%;" type="submit" onclick="onRun()">运行</button>
+        <button class="comments" style="font-size: large;height: 4.6%;" type="clear" onclick="onReset()">重置</button>
     </div>
+    <div id="right">
+        <p>输入</p>
+        <textarea class="comments" name="stdin" id="stdin" rows="10"
+                  style="resize: none; font-size: large;"></textarea>
+        <p>输出</p>
+        <textarea class="comments" name="result" id="result" rows="10" readonly="true"
+                  style="resize: none; font-size: large;"></textarea>
+    </div>
+</div>
 </body>
 
 <script>
 	onReset()
+
 </script>
 </html>
 
