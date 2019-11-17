@@ -71,6 +71,8 @@ int main(int argc, const char **argv) {
         return 1;
     }
 
+    printf("Content-Type: text/html\n\n");
+
     pid_t pid = fork();
     if (pid < 0) {
         perror("cs-online: fork()");
