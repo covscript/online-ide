@@ -32,5 +32,5 @@ Enjoy coding!!!!
         error: function (data) {
             // Your code here
         }
-    });
+    })
     ```
