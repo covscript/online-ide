@@ -11,26 +11,26 @@
 <script>
     function onRun() {
         var code = document.getElementById("code").value
-	var stdin = document.getElementById("stdin").value
+        var stdin = document.getElementById("stdin").value
         document.getElementById("result").value = ""
 
-	var ecode = window.btoa(code)
-        $.ajax({
-            type: "post",
-            url: "http://dev.covariant.cn/cgi/cs-online",
-	    data: JSON.stringify({code: ecode, stdin: stdin}),
-            async: true,
-            success: function (data) {
-		document.getElementById("result").value = data
-            },
-            error: function (data) {
-                document.getElementById("result").value = "Error: " + data
-            }
-        });
+        var ecode = window.btoa(code)
+            $.ajax({
+                type: "post",
+                url: "http://dev.covariant.cn/cgi/cs-online",
+            data: JSON.stringify({code: ecode, stdin: stdin == "" ? "\0" : stdin}),
+                async: true,
+                success: function (data) {
+            document.getElementById("result").value = data
+                },
+                error: function (data) {
+                    document.getElementById("result").value = "Error: " + data
+                }
+            });
     }
 
     function onReset() {
-	document.getElementById("result").value = ""
+	    document.getElementById("result").value = ""
         document.getElementById("code").value =
             "import streams\n" +
             "\n" +
@@ -45,24 +45,40 @@
     }
 </script>
 
+<style>
+#main  {float:left; border:1px;height:100%;width:100%;}
+#left  {float:left; border:1px;height:100%;width:48%; }
+#right {float:right;border:1px;height:100%;width:48%; }
+.comments {
+    width:100%;
+    overflow:auto;
+    word-break:break-all;
+    font-family:monospace;
+}
+</style>
+
 <body>
-    <textarea name="code" id="code" cols="60" rows="20" autofocus="true"
-        style="resize: none; font-size: 24px;"></textarea>
-    <br>
-    <p>stdin</p>
-    <textarea name="stdin" id="stdin" cols="60" rows="5" autofocus="true"
-        style="resize: none; font-size: 24px;"></textarea>
-    <br>
-    <button type="submit" onclick="onRun()">Run</button>
-    <button type="clear" onclick="onReset()">Reset</button>
-    <br>
-    <textarea name="result" id="result" cols="60" rows="5" readonly="true"
-        style="resize: none; font-size: 24px;"></textarea>
+    <div id="main">
+            <div id="left">
+                <p>代码</p>
+                <textarea class="comments" name="code" id="code" rows="20" autofocus="true"
+                    style="resize: none; font-size: large;"></textarea>
+                <button class="comments" style="font-size: large;height: 4.6%;" type="submit" onclick="onRun()">运行</button>
+                <button class="comments" style="font-size: large;height: 4.6%;" type="clear" onclick="onReset()">重置</button>
+            </div>
+            <div id="right">
+                <p>输入</p>
+                <textarea class="comments" name="stdin" id="stdin" rows="10"
+                    style="resize: none; font-size: large;"></textarea>
+                <p>输出</p>
+                <textarea class="comments" name="result" id="result" rows="10" readonly="true"
+                    style="resize: none; font-size: large;"></textarea>
+            </div>      
+    </div>
 </body>
 
-	<script>
-		onReset()
-	</script>
-
+<script>
+	onReset()
+</script>
 </html>
 
