@@ -1,12 +1,17 @@
 //
 // Created by kiva on 2019/11/17.
 //
-#include <unistd.h>
+#include <csignal>
+#include <cerrno>
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <json/json.h>
 #include <cppcodec/base64_rfc4648.hpp>
+
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 using Base64 = cppcodec::base64_rfc4648;
 using CodeSession = std::pair<std::string, std::string>;
