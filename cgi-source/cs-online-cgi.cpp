@@ -84,7 +84,7 @@ int main(int argc, const char **argv) {
         }
 
         char *bin = strdup("/usr/bin/cs-code-runner");
-        char *timeout = strdup("10");
+        char *timeout = strdup("1000");
         char *file = strdup(csFile.c_str());
 
         if (bin == nullptr || file == nullptr || timeout == nullptr) {
