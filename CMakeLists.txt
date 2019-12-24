@@ -43,8 +43,8 @@ add_subdirectory(third-party/cppcodec)
 include_directories(third-party/cppcodec)
 
 add_executable(cs-code-runner cgi-source/cs-code-runner.cpp)
-add_executable(cs-online cgi-source/cs-online-cgi.cpp)
+add_executable(cs-online-cgi cgi-source/cs-online-cgi.cpp)
 
-add_dependencies(cs-online cs-code-runner)
+add_dependencies(cs-online-cgi cs-code-runner)
 
-target_link_libraries(cs-online jsoncpp_lib)
+target_link_libraries(cs-online-cgi jsoncpp_lib)
