@@ -92,7 +92,6 @@ int main(int argc, const char **argv) {
             exit(1);
         }
 
-	printf("Content-Type: text/html\n\n");
         char *const args[4] = {bin, timeout, file, nullptr};
         execve(bin, args, nullptr);
 
