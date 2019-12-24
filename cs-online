@@ -1,4 +1,4 @@
 #!/bin/bash
-read code
+
 echo -ne 'Content-type: text/html\n\n'
-echo $code | cs-online-cgi
+cat - | cs-online-cgi
