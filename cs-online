@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo -ne 'Content-type: text/html\n\n'
-cat - | cs-online-cgi
+cat - | cs-online-cgi 2>&1
