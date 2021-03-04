@@ -1,7 +1,0 @@
-#pragma once
-
-#ifdef HAVE_CONFIG_H
-
-#cmakedefine01 HAVE_SIGTIMEDWAIT
-
-#endif

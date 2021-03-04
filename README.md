@@ -1,12 +1,11 @@
-CovScript Online IDE
+CovScript Online Interpreter
 ====================
 
-Enjoy coding!!!!
-
-# Online IDE API
+# Online Interpreter API
 * Run CovScript Code with customized stdin input
     ```
-    POST http://dev.covariant.cn/cgi/cs-online
+    POST http://dev.covariant.cn/cgi/cs-online (unencrypted)
+      or  https://dev.covariant.cn/cgi/cs-online (encrypted)
     
     {
         "code": "<base64-of-code>",

@@ -11,8 +11,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include "cs-online-ide-config.h"
-
 int timed_wait(const sigset_t *__restrict set,
                siginfo_t *__restrict info,
                const struct timespec *__restrict timeout) {
