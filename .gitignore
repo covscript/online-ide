@@ -38,3 +38,5 @@ cmake-build-*/
 java-out
 
 CMakeFiles/
+
+build/
