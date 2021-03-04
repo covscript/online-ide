@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Covariant Script Online IDE</title>
+    <title>Covariant Script Online Interpreter</title>
 </head>
 
 <script src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
@@ -32,18 +32,14 @@
     }
 
     function onReset() {
+        document.getElementById("stdin").value =
+            "{\"username\":\"mikecovlee\", \"password\":\"helloworld\"}"
 	    document.getElementById("result").value = ""
         document.getElementById("code").value =
-            "import streams\n" +
-            "\n" +
-            "@begin\n\n" +
-            "streams.iterate(1, [](x) -> x * 2)\n" +
-            "       .filter([](x) -> x > 100000)\n" +
-            "       .skip(5)\n" +
-            "       .take_while([](x) -> x <= 5000000)\n" +
-            "       .for_each(system.out.println)\n" +
-            "\n" +
-            "@end\n"
+            "import codec.json as json\n\n" +
+            "var c = json.to_var(json.from_string(system.in.getline()))\n\n" +
+            "system.out.println(\"UserName = \" + c.username)\n" +
+            "system.out.println(\"Password = \" + c.password)\n"
     }
 
 </script>
@@ -64,17 +60,19 @@
 <body>
 <div id="main">
     <div id="left">
-        <p>代码</p>
+        <p>Covariant Script代码</p>
         <textarea class="comments" name="code" id="code" rows="20" autofocus="true"
                   style="resize: none; font-size: large;"></textarea>
         <button class="comments" style="font-size: large;height: 4.6%;" type="submit" onclick="onRun()">运行</button>
         <button class="comments" style="font-size: large;height: 4.6%;" type="clear" onclick="onReset()">重置</button>
+        <p>在微信小程序中体验：</p>
+        <img height="150px", src="wechat.jpg">
     </div>
     <div id="right">
-        <p>输入</p>
+        <p>程序输入</p>
         <textarea class="comments" name="stdin" id="stdin" rows="10"
                   style="resize: none; font-size: large;"></textarea>
-        <p>输出</p>
+        <p>程序输出</p>
         <textarea class="comments" name="result" id="result" rows="10" readonly="true"
                   style="resize: none; font-size: large;"></textarea>
     </div>
