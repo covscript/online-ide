@@ -8,7 +8,7 @@ function start ()
 }
 mkdir -p build-cache
 cd build-cache
-git_repo=https://github.com/covscript
+git_repo=https://hub.fastgit.org/covscript
 function fetch_git ()
 {
     if [ ! -d "$1" ]; then
