@@ -9,6 +9,7 @@
 #include <json/json.h>
 #include <cppcodec/base64_rfc4648.hpp>
 
+#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
