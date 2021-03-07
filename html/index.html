@@ -7,7 +7,7 @@
     <title>Covariant Script Online Interpreter</title>
 </head>
 
-<script src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script>
     function onRun() {
         var code = document.getElementById("code").value
@@ -20,7 +20,7 @@
         $.ajax({
             type: "post",
             url: "http://dev.covariant.cn/cgi/cs-online",
-            data: JSON.stringify({code: ecode, stdin: estdin}),
+            data: JSON.stringify({ code: ecode, stdin: estdin }),
             async: true,
             success: function (data) {
                 document.getElementById("result").value = data
@@ -34,7 +34,7 @@
     function onReset() {
         document.getElementById("stdin").value =
             "{\"username\":\"mikecovlee\", \"password\":\"helloworld\"}"
-	    document.getElementById("result").value = ""
+        document.getElementById("result").value = ""
         document.getElementById("code").value =
             "import codec.json as json\n\n" +
             "var c = json.to_var(json.from_string(system.in.getline()))\n\n" +
@@ -45,43 +45,75 @@
 </script>
 
 <style>
-#main  {float:left; border:1px;height:100%;width:100%;}
-#left  {float:left; border:1px;height:100%;width:48%; }
-#right {float:right;border:1px;height:100%;width:48%; }
-.comments {
-    width:100%;
-    overflow:auto;
-    word-break:break-all;
-    font-family:monospace;
-}
+    #main {
+        float: left;
+        border: 1px;
+        width: 100%;
+    }
 
+    #left {
+        float: left;
+        border: 1px;
+        width: 48%;
+    }
+
+    #right {
+        float: right;
+        border: 1px;
+        width: 48%;
+    }
+
+    .textbox {
+        width: 100%;
+        resize: none;
+        overflow: auto;
+        word-break: keep-all;
+        font-size: 16px;
+        font-family: "Consolas", monospace;
+        border-radius: 6px;
+    }
+
+    .button {
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 6px;
+    }
+</style>
+
+<style type="text/css">
+    p {
+        color: black;
+        font-family: "Noto Sans", sans-serif
+    }
 </style>
 
 <body>
-<div id="main">
-    <div id="left">
-        <p>Covariant Script代码</p>
-        <textarea class="comments" name="code" id="code" rows="20" autofocus="true"
-                  style="resize: none; font-size: large;"></textarea>
-        <button class="comments" style="font-size: large;height: 4.6%;" type="submit" onclick="onRun()">运行</button>
-        <button class="comments" style="font-size: large;height: 4.6%;" type="clear" onclick="onReset()">重置</button>
-        <p>在微信小程序中体验：</p>
-        <img height="150px", src="wechat.jpg">
+    <div id="main">
+        <div id="left">
+            <p>Covariant Script代码</p>
+            <textarea class="textbox" spellcheck="false" name="code" id="code" rows="20" autofocus="true"></textarea>
+        </div>
+        <div id="right">
+            <p>程序输入 & 输出</p>
+            <textarea class="textbox" spellcheck="false" name="stdin" id="stdin" rows="9" style="margin-bottom:33px;"></textarea>
+            <textarea class="textbox" spellcheck="false" name="result" id="result" rows="9" readonly="true"></textarea>
+        </div>
     </div>
-    <div id="right">
-        <p>程序输入</p>
-        <textarea class="comments" name="stdin" id="stdin" rows="10"
-                  style="resize: none; font-size: large;"></textarea>
-        <p>程序输出</p>
-        <textarea class="comments" name="result" id="result" rows="10" readonly="true"
-                  style="resize: none; font-size: large;"></textarea>
+    <div id="main">
+        <div id="left">
+            <button class="button" style="background:green;font-size: large;height: 4.6%;" type="submit"
+                onclick="onRun()">运行</button>
+            <p>在微信小程序中体验</p>
+            <img height="130px" , src="wechat.jpg">
+        </div>
+        <div id="right">
+            <button class="button" style="font-size: large;height: 4.6%;" type="clear" onclick="onReset()">重置</button>
+        </div>
     </div>
-</div>
 </body>
 
 <script>
-	onReset()
-
+    onReset()
 </script>
-</html>
 
+</html>
