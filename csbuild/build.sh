@@ -26,10 +26,12 @@ fetch_git covscript-regex master &
 fetch_git covscript-codec master &
 fetch_git covscript-network master &
 fetch_git covscript-streams master &
+fetch_git covscript-database master &
 wait
 start covscript "./csbuild/make.sh"
 start covscript-regex "./csbuild/make.sh" &
 start covscript-codec "./csbuild/make.sh" &
 start covscript-network "./csbuild/make.sh" &
 start covscript-streams "./csbuild/make.sh" &
+start covscript-database "./csbuild/make.sh" &
 wait
