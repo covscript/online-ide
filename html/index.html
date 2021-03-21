@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -7,15 +7,16 @@
     <title>Covariant Script Online Interpreter</title>
 </head>
 
-<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="jquery.min.js"></script>
+<script src="base64.min.js"></script>
 <script>
     function GetQueryString(name) {
-      let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-      let r = window.location.search.substr(1).match(reg)
-      if (r != null) {
-        return unescape(r[2])
-      }
-      return null
+        let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+        let r = window.location.search.substr(1).match(reg)
+        if (r != null) {
+            return unescape(r[2])
+        }
+        return null
     }
 
     function onRun() {
@@ -23,8 +24,8 @@
         var stdin = document.getElementById("stdin").value
         document.getElementById("result").value = ""
 
-        var ecode = window.btoa(code)
-        var estdin = window.btoa(stdin)
+        var ecode = Base64.encode(code)
+        var estdin = Base64.encode(stdin)
 
         $.ajax({
             type: "post",
@@ -53,8 +54,7 @@
 
     function onReset() {
         var page = GetQueryString("page")
-        if (page != null)
-        {
+        if (page != null) {
             document.getElementById("stdin").value = ""
             document.getElementById("result").value = ""
             $.ajax({
@@ -71,7 +71,6 @@
             resetDefault();
         }
     }
-
 </script>
 
 <style>
@@ -125,7 +124,8 @@
         </div>
         <div id="right">
             <p>程序输入 & 输出</p>
-            <textarea class="textbox" spellcheck="false" name="stdin" id="stdin" rows="9" style="margin-bottom:33px;"></textarea>
+            <textarea class="textbox" spellcheck="false" name="stdin" id="stdin" rows="9"
+                style="margin-bottom:33px;"></textarea>
             <textarea class="textbox" spellcheck="false" name="result" id="result" rows="9" readonly="true"></textarea>
         </div>
     </div>
