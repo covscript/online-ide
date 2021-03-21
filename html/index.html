@@ -9,6 +9,15 @@
 
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script>
+    function GetQueryString(name) {
+      let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+      let r = window.location.search.substr(1).match(reg)
+      if (r != null) {
+        return unescape(r[2])
+      }
+      return null
+    }
+
     function onRun() {
         var code = document.getElementById("code").value
         var stdin = document.getElementById("stdin").value
@@ -31,7 +40,7 @@
         });
     }
 
-    function onReset() {
+    function resetDefault() {
         document.getElementById("stdin").value =
             "{\"username\":\"mikecovlee\", \"password\":\"helloworld\"}"
         document.getElementById("result").value = ""
@@ -40,6 +49,27 @@
             "var c = json.to_var(json.from_string(system.in.getline()))\n\n" +
             "system.out.println(\"UserName = \" + c.username)\n" +
             "system.out.println(\"Password = \" + c.password)\n"
+    }
+
+    function onReset() {
+        var page = GetQueryString("page")
+        if (page != null)
+        {
+            document.getElementById("stdin").value = ""
+            document.getElementById("result").value = ""
+            $.ajax({
+                type: "get",
+                url: "http://wiki.csman.info/" + page + "?action=raw",
+                success: function (data) {
+                    document.getElementById("code").value = data
+                },
+                error: function (data) {
+                    resetDefault();
+                }
+            })
+        } else {
+            resetDefault();
+        }
     }
 
 </script>
