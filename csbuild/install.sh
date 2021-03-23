@@ -5,7 +5,6 @@ cp -rf covscript/build ..
 cp -rf covscript-regex/build ..
 cp -rf covscript-codec/build ..
 cp -rf covscript-network/build ..
-cp -rf covscript-streams/build ..
 cp -rf covscript-database/build ..
 cd ..
 rm build/bin/cs_dbg
