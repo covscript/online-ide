@@ -21,13 +21,17 @@ function fetch_git ()
         cd ..
     fi
 }
+fetch_git stdutils main &
 fetch_git covscript sandbox &
+fetch_git covscript-curl master &
 fetch_git covscript-regex master &
 fetch_git covscript-codec master &
 fetch_git covscript-network master &
 fetch_git covscript-database master &
 wait
 start covscript "./csbuild/make.sh"
+start stdutils "./csbuild/make.sh" &
+start covscript-curl "./csbuild/make.sh" &
 start covscript-regex "./csbuild/make.sh" &
 start covscript-codec "./csbuild/make.sh" &
 start covscript-network "./csbuild/make.sh" &
