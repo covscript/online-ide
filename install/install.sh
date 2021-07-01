@@ -4,7 +4,7 @@
 install_home=/home/covscript/online-ide
 
 # Git Repo
-git_repo=https://hub.fastgit.org/covscript
+git_repo=https://github.com/covscript
 
 # HTML Page
 http_path=/var/www/html

@@ -6,7 +6,7 @@ Try it on: http://dev.covariant.cn/ or WeChat Miniprogram
 
 ## Insatll Guide
 1. Prepare: debian based linux, apache2 and [csbuild requirements](https://github.com/covscript/csbuild)
-2. Clone this repository into your system, consider using mirrors like https://hub.fastgit.org/
+2. Clone this repository into your system
 3. Copy [install.sh](install/install.sh) to some place you like
 4. Modify the `install_home` settings in `install.sh` to where your local repo placed.
 5. Setup crontab to call install script automatically.
