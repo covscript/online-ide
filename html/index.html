@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/base64.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/buttons.min.css">
 
     <title>Covariant Script Online Interpreter</title>
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
@@ -28,14 +29,23 @@
     </div>
     <div id="main">
         <div id="left">
-            <button class="button" style="background:green;font-size: large;height: 4.6%;" type="submit"
+            <button class="button" style="background:hsl(212, 61%, 50%);font-size: large;height: 4.6%;" type="submit"
                 onclick="onRun()">运行</button>
-            <p>在微信小程序中体验</p>
-            <img height="130px" , src="wechat.jpg">
+            <button class="button" style="background:limegreen;font-size: large;height: 4.6%;"
+                type="clear" onclick="genWxaCode()">在微信小程序中继续</button>
         </div>
         <div id="right">
-            <button class="button" style="font-size: large;height: 4.6%;" type="clear" onclick="onReset()">重置</button>
+            <button class="button" style="background:#ffd000;font-size: large;height: 4.6%;" type="clear"
+                onclick="onReset()">重置</button>
+            <a href="https://csman.info/" target ="_blank">
+                <button class="button" style="font-size: large;height: 4.6%;" type="clear">查阅 CovScript 在线文档</button>
+            </a>
         </div>
+    </div>
+    <div id="myModal" class="modal">
+        <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+        <img class="modal-content" src="" id="wxacode">
+        <div id="caption"></div>
     </div>
 </body>
 

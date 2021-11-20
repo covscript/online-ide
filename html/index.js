@@ -59,3 +59,32 @@ function onReset() {
         resetDefault();
     }
 }
+
+function genWxaCode() {
+    var code = document.getElementById("code").value
+    var stdin = document.getElementById("stdin").value
+
+    var ecode = Base64.encode(code)
+    var estdin = Base64.encode(stdin)
+
+    var xmlhttp;
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "https://dev.covariant.cn/cgi/cs-online-wxacode", true);
+    xmlhttp.responseType = "blob";
+    xmlhttp.onload = function () {
+        console.log(this);
+        if (this.status == 200) {
+            var modal = document.getElementById('myModal');
+            var modalImg = document.getElementById("wxacode");
+            var captionText = document.getElementById("caption");
+            modal.style.display = "block";
+            modalImg.src = window.URL.createObjectURL(this.response);
+            captionText.innerHTML = "使用微信扫码继续(只可扫一次)";
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+        }
+    }
+    xmlhttp.send(JSON.stringify({ code: ecode, stdin: estdin }))
+}
