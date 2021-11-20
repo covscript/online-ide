@@ -1,0 +1,6 @@
+#!/bin/bash
+
+COVSCRIPT_CGI_PATH=/usr/bin
+
+echo -ne 'Content-type: text/html\n\n'
+cat - | cs-code-runner 3000 $COVSCRIPT_CGI_PATH/wxacode.csc 2>&1
