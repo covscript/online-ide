@@ -1,3 +1,5 @@
+var cs_online_ver = "20211120.1"
+
 function GetQueryString(name) {
     let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
     let r = window.location.search.substr(1).match(reg)
@@ -41,6 +43,14 @@ function resetDefault() {
 }
 
 function onReset() {
+    $.ajax({
+        type: "get",
+        url: "https://dev.covariant.cn/cgi/cs-ver",
+        async: true,
+        success: function (data) {
+            document.getElementById("covscript_ver").innerHTML = "Backends: " + cs_online_ver + " CovScript/" + data
+        }
+    })
     var page = GetQueryString("page")
     if (page != null) {
         document.getElementById("stdin").value = ""

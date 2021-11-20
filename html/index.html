@@ -27,18 +27,15 @@
             <textarea class="textbox" spellcheck="false" name="result" id="result" rows="9" readonly="true"></textarea>
         </div>
     </div>
-    <div id="main">
+    <div id="main" style="margin-bottom: 20px;">
         <div id="left">
-            <button class="button" style="background:hsl(212, 61%, 50%);font-size: large;height: 4.6%;" type="submit"
-                onclick="onRun()">运行</button>
-            <button class="button" style="background:limegreen;font-size: large;height: 4.6%;"
-                type="clear" onclick="genWxaCode()">在微信小程序中继续</button>
+            <button class="button" style="background:hsl(212, 61%, 50%);" type="submit" onclick="onRun()">运行</button>
+            <button class="button" style="background:limegreen;" type="clear" onclick="genWxaCode()">在微信小程序中继续</button>
         </div>
         <div id="right">
-            <button class="button" style="background:#ffd000;font-size: large;height: 4.6%;" type="clear"
-                onclick="onReset()">重置</button>
-            <a href="https://csman.info/" target ="_blank">
-                <button class="button" style="font-size: large;height: 4.6%;" type="clear">查阅 CovScript 在线文档</button>
+            <button class="button" style="background:#ffd000;" type="clear" onclick="onReset()">重置</button>
+            <a href="https://csman.info/" target="_blank">
+                <button class="button" type="clear">查阅 CovScript 在线文档</button>
             </a>
         </div>
     </div>
@@ -46,6 +43,15 @@
         <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
         <img class="modal-content" src="" id="wxacode">
         <div id="caption"></div>
+    </div>
+    <div style="font-size: small;">
+        <p>CovScript 在线解释环境</p>
+        <p>版权所有 © Michael Lee(李登淳) 2017-2021</p>
+        <div id="covscript_ver"></div>
+        <script type="text/javascript">
+            document.write("<p>UserAgent: ")
+            document.write(navigator.userAgent + "</p>")
+        </script>
     </div>
 </body>
 
