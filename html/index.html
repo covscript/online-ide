@@ -4,117 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/base64.min.js"></script>
+
     <title>Covariant Script Online Interpreter</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script type="text/javascript" src="index.js"></script>
 </head>
-
-<script src="jquery.min.js"></script>
-<script src="base64.min.js"></script>
-<script>
-    function GetQueryString(name) {
-        let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-        let r = window.location.search.substr(1).match(reg)
-        if (r != null) {
-            return unescape(r[2])
-        }
-        return null
-    }
-
-    function onRun() {
-        var code = document.getElementById("code").value
-        var stdin = document.getElementById("stdin").value
-        document.getElementById("result").value = ""
-
-        var ecode = Base64.encode(code)
-        var estdin = Base64.encode(stdin)
-
-        $.ajax({
-            type: "post",
-            url: "http://dev.covariant.cn/cgi/cs-online",
-            data: JSON.stringify({ code: ecode, stdin: estdin }),
-            async: true,
-            success: function (data) {
-                document.getElementById("result").value = data
-            },
-            error: function (data) {
-                document.getElementById("result").value = "Error: " + data
-            }
-        });
-    }
-
-    function resetDefault() {
-        document.getElementById("stdin").value =
-            "{\"username\":\"mikecovlee\", \"password\":\"helloworld\"}"
-        document.getElementById("result").value = ""
-        document.getElementById("code").value =
-            "import codec.json as json\n\n" +
-            "var c = json.to_var(json.from_string(system.in.getline()))\n\n" +
-            "system.out.println(\"UserName = \" + c.username)\n" +
-            "system.out.println(\"Password = \" + c.password)\n"
-    }
-
-    function onReset() {
-        var page = GetQueryString("page")
-        if (page != null) {
-            document.getElementById("stdin").value = ""
-            document.getElementById("result").value = ""
-            $.ajax({
-                type: "get",
-                url: "https://csman.info/doku.php?id=" + page + "&do=export_raw",
-                success: function (data) {
-                    document.getElementById("code").value = data
-                },
-                error: function (data) {
-                    resetDefault();
-                }
-            })
-        } else {
-            resetDefault();
-        }
-    }
-</script>
-
-<style>
-    #main {
-        float: left;
-        border: 1px;
-        width: 100%;
-    }
-
-    #left {
-        float: left;
-        border: 1px;
-        width: 48%;
-    }
-
-    #right {
-        float: right;
-        border: 1px;
-        width: 48%;
-    }
-
-    .textbox {
-        width: 100%;
-        resize: none;
-        overflow: auto;
-        word-break: keep-all;
-        font-size: 16px;
-        font-family: "Consolas", monospace;
-        border-radius: 6px;
-    }
-
-    .button {
-        width: 100%;
-        margin-top: 20px;
-        border-radius: 6px;
-    }
-</style>
-
-<style type="text/css">
-    p {
-        color: black;
-        font-family: "Noto Sans", sans-serif
-    }
-</style>
 
 <body>
     <div id="main">

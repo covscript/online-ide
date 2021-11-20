@@ -1,0 +1,38 @@
+#main {
+    float: left;
+    border: 1px;
+    width: 100%;
+}
+
+#left {
+    float: left;
+    border: 1px;
+    width: 48%;
+}
+
+#right {
+    float: right;
+    border: 1px;
+    width: 48%;
+}
+
+.textbox {
+    width: 100%;
+    resize: none;
+    overflow: auto;
+    word-break: keep-all;
+    font-size: 16px;
+    font-family: "Consolas", monospace;
+    border-radius: 6px;
+}
+
+.button {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+p {
+    color: black;
+    font-family: "Noto Sans", sans-serif
+}
