@@ -147,6 +147,50 @@ class mysql extends csdbc.database_base
     end
 end
 
+# Expires time(second)
+var expire_time = 600
+
+function get_time()
+    var tm = runtime.utc_time()
+    return {"year": tm.year, "yday": tm.yday, "hour": tm.hour, "min": tm.min, "sec": tm.sec}.to_hash_map()
+end
+
+function time_padding(time, width)
+    var last = width - time.size
+    if last <= 0
+        return time
+    end
+    var str = new string
+    foreach it in range(last) do str += "0"
+    return str + time
+end
+
+function time2str(tm)
+    return json.to_string(json.from_var(tm))
+end
+
+function record_expired(timestamp)
+    var ts = json.to_var(json.from_string(timestamp))
+    var cur = get_time()
+    if ts.year != cur.year
+        return true
+    end
+    if cur.yday - ts.yday > 1
+        return true
+    end
+    if cur.yday > ts.yday
+        cur.hour += 24
+    end
+    var diff = (cur.hour - ts.hour)*3600 + (cur.min - ts.min)*60 + (cur.sec - ts.sec)
+    return diff > expire_time
+end
+
+function get_timestr()
+    var str = to_string(runtime.utc_time())
+    str.cut(1)
+    return move(str)
+end
+
 var input = system.in.getline()
 
 # Database
@@ -158,5 +202,7 @@ var db = new mysql; db.db = database.connect(conn_str)
 var data = db.exec("SELECT * FROM temp_codes WHERE hash=\"" + input + "\"")
 if !data.empty()
     system.out.print("{\"code\":\"" + data[0][1].data + "\",\"stdin\":\"" + data[0][2].data + "\"}")
-    db.just_exec("DELETE FROM temp_codes WHERE hash=\"" + input + "\"")
+    if record_expired(data[0][3].data)
+        db.just_exec("DELETE FROM temp_codes WHERE hash=\"" + input + "\"")
+    end
 end
