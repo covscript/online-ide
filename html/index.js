@@ -89,7 +89,7 @@ function genWxaCode() {
             var captionText = document.getElementById("caption");
             modal.style.display = "block";
             modalImg.src = window.URL.createObjectURL(this.response);
-            captionText.innerHTML = "使用微信扫码继续(只可扫一次)";
+            captionText.innerHTML = "使用微信扫码继续(10分钟内可用)";
             var span = document.getElementsByClassName("close")[0];
             span.onclick = function () {
                 modal.style.display = "none";
