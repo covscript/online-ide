@@ -27,7 +27,7 @@ fetch_git covscript-curl master &
 fetch_git covscript-regex master &
 fetch_git covscript-codec master &
 fetch_git covscript-network master &
-fetch_git covscript-database master &
+fetch_git covscript-database main &
 wait
 start covscript "./csbuild/make.sh"
 start stdutils "./csbuild/make.sh" &
